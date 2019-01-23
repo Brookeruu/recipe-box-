@@ -11,25 +11,29 @@
 <h3>Recipes</h3>
 <h3>{{currentFocus}}</h3>
 
-  <div [class]="priorityColor(currentRecipe)" *ngFor="let currentRecipe of recipes">
+  <div [class]="priorityColor(currentRecipe)"  *ngFor="let currentRecipe of recipes">
     <h3>{{currentRecipe.title}}</h3>
     <p>{{currentRecipe.description}}</p>
     <ul>
       <li>{{currentRecipe.ingredients}}</li>
       <li>{{currentRecipe.priority}}</li>
     </ul>
-    <button (click)="editRecipe()">Edit!</button>
+    <button (click)="editRecipe(currentRecipe)">Edit!</button>
   </div>
 
-  <h3>{{selectedRecipe.description}}</h3>
-<p>Recipe Complete? {{selectedRecipe.served}}</p>
-<h3>Edit Recipe</h3>
-<label>Enter Recipe Description:</label>
-<input [(ngModel)]="selectedRecipe.description">
-<label>Enter Recipe Priority (1-3):</label>
-<br>
-<input type="radio" [(ngModel)]="selectedRecipe.priority" value="1">1 (Low Priority)<br>
-<input type="radio" [(ngModel)]="selectedRecipe.priority" value="2">2 (Medium Priority)<br>
-<input type="radio" [(ngModel)]="selectedRecipe.priority" value="3">3 (High Priority)
+  <!-- <h3>{{selectedRecipe.description}}</h3> -->
+  <div *ngIf="selectedRecipe">
+    <h3>{{selectedRecipe.description}}</h3>
+    <p>Recipe Complete? {{selectedRecipe.done}}</p>
+    <h3>Edit Recipe</h3>
+    <label>Enter Recipe Description:</label>
+    <input [(ngModel)]="selectedRecipe.description">
+    <label>Enter Recipe Priority (1-3):</label>
+    <br>
+    <input type="radio" [(ngModel)]="selectedRecipe.priority" [value]="1">1 (Low Priority)<br>
+    <input type="radio" [(ngModel)]="selectedRecipe.priority" [value]="2">2 (Medium Priority)<br>
+    <input type="radio" [(ngModel)]="selectedRecipe.priority" [value]="3">3 (High Priority)
+    <button (click)="finishedEditing()">Done</button>
+  </div>
 
 </div>
